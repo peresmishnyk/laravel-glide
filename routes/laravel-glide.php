@@ -24,7 +24,8 @@
 
 
 //// Glide
-//$glide_urls = config('laravel-glide.url');
+dump(config('laravel-glide'));
+//$glide_urls = config('laravel-glide');
 //$glide_urls = is_array($glide_urls) ? $glide_urls : [$glide_urls];
 //foreach ($glide_urls as $url) {
 //    $url = trim($url, '/');
