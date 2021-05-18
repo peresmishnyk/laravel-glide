@@ -11,4 +11,5 @@ class AddonServiceProvider extends ServiceProvider
     protected $vendorName = 'peresmishnyk';
     protected $packageName = 'laravel-glide';
     protected $commands = [];
+
 }

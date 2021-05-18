@@ -6,21 +6,15 @@
 
 > **// TODO: customize this description and delete this line**
 
-This package provides XXX functionality for projects that use the [Backpack for Laravel](https://backpackforlaravel.com/) administration panel. 
+This package is wrapper for [thephpleague/glide-laravel](!https://github.com/thephpleague/glide-laravel).
 
-More exactly, it adds X and Y so that you can easily do Z.
-
+Glide is a wonderfully easy on-demand image manipulation library written in PHP. Its straightforward API is exposed via
+HTTP, similar to cloud image processing services like Imgix and Cloudinary. Glide leverages powerful libraries like
+Intervention Image (for image handling and manipulation) and Flysystem (for file system abstraction).
 
 ## Screenshots
 
-> **// TODO: add a screenshot and delete these lines;** 
-> to add a screenshot to a github markdown file, the easiest way is to
-> open an issue, upload the screenshot there with drag&drop, then close the issue;
-> you now have that image hosted on Github's servers; so you can then right-click 
-> the image to copy its URL, and use that URL wherever you want (for example... here)
-
-![Backpack Toggle Field Addon](https://via.placeholder.com/600x250?text=screenshot+needed)
-
+![Backpack Toggle Field Addon](https://glide.herokuapp.com/1.0/kayaks.jpg?w=1000&gam=.9&sharp=8)
 
 ## Installation
 
@@ -32,57 +26,46 @@ composer require peresmishnyk/laravel-glide
 
 ## Usage
 
-> **// TODO: explain to your users how to use the functionality** this package provides; 
+> **// TODO: explain to your users how to use the functionality** this package provides;
 > we've provided an example for a Backpack addon that provides a custom field
 
-To use the field this package provides, inside your custom CrudController do:
+The package registers url prefixes /img/... and /glide/...
 
+```code
+//your-domain.tld/img/@{disk}/{image_path}?w=200
+```
+
+OR
+
+```code
+//your-domain.tld/glide/@{disk}/{image_path}?w=200
+```
+
+something like https://test.site/img/@local/app/galeries/daria.jpg?w=100
+
+where *{disk}* is any disk from config/filesystems.php
+
+### Example filesystems config
 ```php
-$this->crud->addField([
-    'name' => 'agreed',
-    'label' => 'I agree to the terms and conditions',
-    'type' => 'new_field_name',
-    'view_namespace' => 'peresmishnyk.laravel-glide::fields',
-]);
-```
-
-Notice the ```view_namespace``` attribute - make sure that is exactly as above, to tell Backpack to load the field from this _addon package_, instead of assuming it's inside the _Backpack\CRUD package_.
-
-
-## Overwriting
-
-> **// TODO: explain to your users how to overwrite the functionality this package provides;**
-> we've provided an example for a custom field
-
-If you need to change the field in any way, you can easily publish the file to your app, and modify that file any way you want. But please keep in mind that you will not be getting any updates.
-
-**Step 1.** Copy-paste the blade file to your directory:
-```bash
-# create the fields directory if it's not already there
-mkdir -p resources/views/vendor/backpack/crud/fields
-
-# copy the blade file inside the folder we created above
-cp -i vendor/peresmishnyk/laravel-glide/src/resources/views/fields/field_name.blade.php resources/views/vendor/backpack/crud/fields/field_name.blade.php
-```
-
-**Step 2.** Remove the vendor namespace wherever you've used the field:
-```diff
-$this->crud->addField([
-    'name' => 'agreed',
-    'type' => 'toggle',
-    'label' => 'I agree to the terms and conditions',
--   'view_namespace' => 'peresmishnyk.laravel-glide::fields'
-]);
-```
-
-**Step 3.** Uninstall this package. Since it only provides one file, and you're no longer using that file, it makes no sense to have the package installed:
-```bash
-composer remove peresmishnyk/laravel-glide
+'disk' =>[
+    // For access to files in storage
+    'local' => [
+        'driver' => 'local',
+        'root' => storage_path('app'),
+    ],
+    // For access to files under vcs
+    'img' => [
+        'driver' => 'local',
+        'root' => app_path('../public/img'),
+    ],
+    ...
+    ];
 ```
 
 ## Change log
 
-Changes are documented here on Github. Please see the [Releases tab](https://github.com/peresmishnyk/laravel-glide/releases).
+Changes are documented here on Github. Please see
+the [Releases tab](https://github.com/peresmishnyk/laravel-glide/releases).
 
 ## Testing
 
@@ -105,15 +88,23 @@ If you discover any security related issues, please email michkire@gmail.com ins
 
 ## License
 
-This project was released under MIT, so you can install it on top of any Backpack & Laravel project. Please see the [license file](license.md) for more information. 
+This project was released under MIT, so you can install it on top of any Backpack & Laravel project. Please see
+the [license file](license.md) for more information.
 
-However, please note that you do need Backpack installed, so you need to also abide by its [YUMMY License](https://github.com/Laravel-Backpack/CRUD/blob/master/LICENSE.md). That means in production you'll need a Backpack license code. You can get a free one for non-commercial use (or a paid one for commercial use) on [backpackforlaravel.com](https://backpackforlaravel.com).
+However, please note that you do need Backpack installed, so you need to also abide by
+its [YUMMY License](https://github.com/Laravel-Backpack/CRUD/blob/master/LICENSE.md). That means in production you'll
+need a Backpack license code. You can get a free one for non-commercial use (or a paid one for commercial use)
+on [backpackforlaravel.com](https://backpackforlaravel.com).
 
 
 [ico-version]: https://img.shields.io/packagist/v/peresmishnyk/laravel-glide.svg?style=flat-square
+
 [ico-downloads]: https://img.shields.io/packagist/dt/peresmishnyk/laravel-glide.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/peresmishnyk/laravel-glide
+
 [link-downloads]: https://packagist.org/packages/peresmishnyk/laravel-glide
+
 [link-author]: https://github.com/peresmishnyk
+
 [link-contributors]: ../../contributors

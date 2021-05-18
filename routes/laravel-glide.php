@@ -23,8 +23,12 @@
 // });
 
 // Glide
-Route::get('/img/{path}', [\Peresmishnyk\LaravelGlide\Http\Controllers\ImageController::class, 'glide'])->where('path', '.*');
-Route::get('/glide/{path}', [\Peresmishnyk\LaravelGlide\Http\Controllers\ImageController::class, 'glide'])->where('path', '.*');
+$glide_urls = config('laravel-glide.url');
+$glide_urls = is_array($glide_urls) ? $glide_urls : [$glide_urls];
+foreach ($glide_urls as $url) {
+    $url = trim($url, '/');
+    Route::get('/' . $url . '/{path}', [\Peresmishnyk\LaravelGlide\Http\Controllers\ImageController::class, 'glide'])->where('path', '.*');
+}
 
 /**
  * Admin Routes
