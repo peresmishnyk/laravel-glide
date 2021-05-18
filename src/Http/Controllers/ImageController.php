@@ -11,7 +11,7 @@ use League\Glide\ServerFactory;
 
 class ImageController extends Controller
 {
-    public function glide(Filesystem $filesystem, $path)
+    public function glide(Filesystem $filesystem, $path="")
     {
         $headers = getallheaders();
         $accept = $headers['Accept'] ?? '';

@@ -22,13 +22,14 @@
 //     Route::get('something/action', \Peresmishnyk\LaravelGlide\Http\Controllers\SomethingController::actionName());
 // });
 
-// Glide
-$glide_urls = config('laravel-glide.url');
-$glide_urls = is_array($glide_urls) ? $glide_urls : [$glide_urls];
-foreach ($glide_urls as $url) {
-    $url = trim($url, '/');
-    Route::get('/' . $url . '/{path}', [\Peresmishnyk\LaravelGlide\Http\Controllers\ImageController::class, 'glide'])->where('path', '.*');
-}
+
+//// Glide
+//$glide_urls = config('laravel-glide.url');
+//$glide_urls = is_array($glide_urls) ? $glide_urls : [$glide_urls];
+//foreach ($glide_urls as $url) {
+//    $url = trim($url, '/');
+//    Route::get('/' . $url . '/{path}', [\Peresmishnyk\LaravelGlide\Http\Controllers\ImageController::class, 'glide'])->where('path', '.*');
+//}
 
 /**
  * Admin Routes
