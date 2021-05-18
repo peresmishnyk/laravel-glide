@@ -30,6 +30,7 @@
 //    $url = trim($url, '/');
 //    Route::get('/' . $url . '/{path}', [\Peresmishnyk\LaravelGlide\Http\Controllers\ImageController::class, 'glide'])->where('path', '.*');
 //}
+Route::get('/img/{path}', [\Peresmishnyk\LaravelGlide\Http\Controllers\ImageController::class, 'glide'])->where('path', '.*');
 
 /**
  * Admin Routes
